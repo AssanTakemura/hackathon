@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(com: String(), configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let entry = SimpleEntry(com: String(), configuration: configuration)
         completion(entry)
     }
 
@@ -25,7 +25,7 @@ struct Provider: IntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = SimpleEntry(com: comment, configuration: configuration)
             entries.append(entry)
         }
 
@@ -36,7 +36,7 @@ struct Provider: IntentTimelineProvider {
 
 //データ中身
 struct SimpleEntry: TimelineEntry {
-    let date: Date
+    let com: String
     let configuration: ConfigurationIntent  // 必要なデータ群を追加
 }
 
@@ -44,7 +44,7 @@ struct TipsEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        Text(entry.com, style: .)
         // self.entry.todaysResult を使ってビューを作っていく
     }
 }
